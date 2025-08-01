@@ -1,4 +1,3 @@
-import os
 from flask import Flask, request, jsonify
 from opensearchpy import OpenSearch, NotFoundError
 import urllib3
@@ -11,7 +10,7 @@ app = Flask(__name__)
 # OpenSearch client configuration
 client = OpenSearch(
     hosts=[{'host': 'localhost', 'port': 9200}],
-    http_auth=('admin', 'Str0ng@Passw0rd!'),  # Replace with your actual password
+    http_auth=('admin', 'Str0ng@Passw0rd!'),  # Replace with your actual credentials
     use_ssl=True,
     verify_certs=False,
     ssl_show_warn=False
@@ -29,9 +28,15 @@ def add_student():
     student_id = data.get("student_id")
     if not student_id:
         return jsonify({"error": "student_id is required"}), 400
-    # Index the document
     client.index(index=INDEX_NAME, id=student_id, body=data)
     return jsonify({"message": "Student added", "student_id": student_id}), 201
+
+@app.route('/student', methods=['GET'])
+def get_all_students():
+    response = client.search(index=INDEX_NAME, body={"query": {"match_all": {}}}, size=1000)
+    hits = response["hits"]["hits"]
+    students = [doc["_source"] for doc in hits]
+    return jsonify(students), 200
 
 @app.route('/student/<student_id>', methods=['GET'])
 def get_student(student_id):
