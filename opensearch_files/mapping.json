@@ -1,0 +1,11 @@
+{
+  "mappings": {
+    "properties": {
+      "student_id": { "type": "keyword" },
+      "name": { "type": "text" },
+      "age": { "type": "integer" },
+      "course": { "type": "text" },
+      "score": { "type": "float" }
+    }
+  }
+}
