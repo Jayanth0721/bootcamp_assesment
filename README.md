@@ -37,13 +37,13 @@
 
 - Images Git Commits
 
-[!![Complete Git Commit Information](image.png)]
+![Commits](image.png)
 
 [!![Commit done by master](image-1.png)]
 
 [!![Commit done by feature/flask_api](image-2.png)]
 
-[!![Commit done by feature?opensearch](image-3.png)]
+[!![Commit done by feature/opensearch](image-3.png)]
 
 
 
@@ -51,6 +51,6 @@
 ![Sample data inserted](image-9.png)
 
 
-To list all data for the student index,
+- To list all data for the student index: curl -X GET http://127.0.0.1:5000/student
 
-curl -X GET http://127.0.0.1:5000/student
+![Sample GET, PUT, POST Operations](image-12.png)
