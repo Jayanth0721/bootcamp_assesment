@@ -47,7 +47,10 @@
 [!![Commit done by feature/opensearch](image-3.png)]
 
 
-
+- Post:
+    `curl -X POST http://127.0.0.1:5000/student \
+-H "Content-Type: application/json" \
+-d '{"student_id":"S105", "name":"Rahul Mehta", "age":22, "course":"Flask", "score":91.2}'`
 
 ![Sample data inserted](image-9.png)
 
