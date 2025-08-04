@@ -54,5 +54,18 @@ def delete_student(student_id):
     except NotFoundError:
         return jsonify({"error": "Student not found"}), 404
 
+#PUT endpoint to update student
+@app.route('/student/<student_id>', methods=['PUT'])
+def update_student(student_id):
+    data = request.json
+    try:
+        # Check if student exists
+        client.get(index=INDEX_NAME, id=student_id)
+        # Update (overwrite) student record
+        client.index(index=INDEX_NAME, id=student_id, body=data)
+        return jsonify({"message": "Student updated", "student_id": student_id}), 200
+    except NotFoundError:
+        return jsonify({"error": "Student not found"}), 404
+
 if __name__ == '__main__':
     app.run(debug=True)
